@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, IsNumber, IsString, isNotEmpty, ValidateNested } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, ValidateNested, IsObject,
+    IsNotEmptyObject } from 'class-validator';
 // import { Category } from '../schemas/book.schema';
 import { Type } from 'class-transformer';
 
@@ -28,7 +29,10 @@ export class CreateStudentDto {
   @IsString()
   readonly breed: string;
 
+  @IsNotEmptyObject()
+  @IsObject()
   @ValidateNested()
+  @ValidateNested({ each: true })
   @Type(() => AddressDto)
   address: AddressDto;
 
